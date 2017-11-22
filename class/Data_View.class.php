@@ -4,13 +4,25 @@
 	
 
 	class DataView{
+		// public function __construct(){
+			// require_once 'apprsal_Handle.class.php';
+			// require_once 'DBConfig.php';
+		// }
+		public function getCount(){
+			require_once 'apprsal_Handle.class.php';
+			require_once 'DBConfig.php';
+			$AH = new ApprsalHandle($dbconfig) ;
+			return $AH->getCount();
+		}
+			
 		public function showHistoryRecord($comm){
 			// 传入小区名称，显示出历史的报价记录和成效案例
 			// SELECT Enquiry_CellName AS Name,PA_Located AS Addr,Apprsal_Use AS ,Apprsal_Up AS Price,Enquiry_Date AS ,".
 					// "PA_Level AS ,PA_YearBuilt AS ,PA_Structure AS ,PA_Elevator AS ,Remark AS ,".
 					// "Enquiry_PmName AS ,OfferPeople AS  
+			
 			require_once 'apprsal_Handle.class.php';
-			require_once "DBConfig.php";
+			require_once 'DBConfig.php';
 			$AH = new ApprsalHandle($dbconfig) ;
 			$arrs = $AH->getOfferedAndCase($comm);
 			echo '<div class="tableBox" > ';

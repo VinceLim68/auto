@@ -86,5 +86,15 @@ class ApprsalHandle{
 
 	}
 	
+	public function getCount(){
+		//查询我当月的报价记录数
+		$day = date('Y-m-01', strtotime(date("Y-m-d")));
+		$sql_count = "SELECT COUNT(Enquiry_CellName) FROM t_enquiry WHERE Enquiry_Date >= '$day' AND OfferPeople = '林晓' ";
+		$res_count = $this->mysqli->query($sql_count);
+		$res = $res_count->fetch_all();
+		return $res[0][0];
+	}
+		
+	
 }
 ?>

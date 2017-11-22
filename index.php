@@ -7,6 +7,8 @@
 	session_start();
 	define('ROOT_PATH',dirname(__FILE__));
 	require_once ROOT_PATH.'/class/Data_View.class.php';
+	//require_once ROOT_PATH.'/class/apprsal_Handle.class.php';
+	//require_once ROOT_PATH.'/class/DBConfig.php';
 	//require_once ROOT_PATH.'/class/apprsal_cdh_Handler.class.php';
 	$isNotValid = false;
 	$isShow = false;
@@ -31,6 +33,9 @@
         }elseif ($_GET["show"]==8){			//为8时什么都不显示，只出现一个查询条
             $isShow = 8;
 			
+        }elseif ($_GET["show"]==9){			//统计我的报价数
+            $isShow = 9;
+			
         }
 	}
 	//if(isset($_SESSION["flag"])||$isShow){
@@ -54,6 +59,7 @@
 		<input type="text" class="inputstyle_out" value="输入小区名搜索" name="fname" onfocus="script:if(this.value=='输入小区名搜索')this.value='';">
 		<input type="submit" class="button" value="查房价" >
 		<div id="goto"><a href="./comm_manager/index.html" >小区名称管理</a></div>
+		<div id="goto"><a href="index.php?show=9" >我的统计</a></div>
 		<!-- <span class="fontS" style="color: white;margin-bottom:0;">专家型估价系统：展示数据细节，独有风险评估</span> -->
 	</div>
 </form>
@@ -215,6 +221,27 @@
 	</div>
 
 	<?php } ?>    
+	
+	<!-- 返回统计查询本月我的报价数 -->
+	<?php if($isShow==9){  ?>
+    
+	<div class = "BoxWhiskerPlot" >
+		<div class="fontS" style="margin:45px;text-align:center;">
+			<a href="index.php?show=3">
+				本月林晓报价
+				<?php 
+					if(empty($dv)){
+						$dv = new DataView;
+					}
+					echo $dv->getCount();
+					
+				?>
+				条
+			</a>
+		</div>
+	</div>
+
+	<?php } ?>  
 	
 	<!-- 生成盒须图 -->
 	<?php if($isShow==1||$isShow==2){  ?>
